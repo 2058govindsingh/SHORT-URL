@@ -1,4 +1,5 @@
 const URL = require('../models/url')
+
 async function handleRedirectToUrl (req, res) {
   const shortId = req.params.shortId
   const entry = await URL.findOneAndUpdate(
@@ -13,9 +14,16 @@ async function handleRedirectToUrl (req, res) {
       }
     }
   )
-  res.redirect(entry.redirectURL);
+  res.redirect(entry.redirectURL)
 }
 
+async function handleHomePage (req, res) {
+  const allUrls = await URL.find({})
+  return res.render('home', {
+    urls: allUrls
+  })
+}
 module.exports = {
-    handleRedirectToUrl,
+  handleRedirectToUrl,
+  handleHomePage
 }

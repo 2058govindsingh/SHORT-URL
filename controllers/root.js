@@ -18,12 +18,13 @@ async function handleRedirectToUrl (req, res) {
 }
 
 async function handleHomePage (req, res) {
-  const allUrls = await URL.find({})
+  if(!req.user) return res.redirect("/login");
+  const allUrls = await URL.find({createdBy : req.user._id});
   return res.render('home', {
     urls: allUrls
   })
 }
-module.exports = {
+module.exports = { 
   handleRedirectToUrl,
   handleHomePage
 }

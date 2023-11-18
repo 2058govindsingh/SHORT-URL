@@ -14,6 +14,10 @@ async function handleRedirectToUrl (req, res) {
       }
     }
   )
+  if(!entry)
+  {
+    return null;
+  }
   res.redirect(entry.redirectURL)
 }
 

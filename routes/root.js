@@ -8,6 +8,6 @@ router.get("/signup", (req, res) => {
 router.get("/login", (req, res) => {
     return res.render("login");
 })
-router.get("/:shortId", handleRedirectToUrl);
-router.get("/", handleHomePage);
+router.get("/", handleHomePage); 
+router.get("/search/:shortId", handleRedirectToUrl);
 module.exports = router;

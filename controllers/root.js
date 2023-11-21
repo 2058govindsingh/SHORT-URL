@@ -20,9 +20,14 @@ async function handleRedirectToUrl (req, res) {
   }
   res.redirect(entry.redirectURL)
 }
-
+async function handleAdminLogin (req, res) {
+  const allUrls = await URL.find({});
+  console.log(allUrls);
+  return res.render('home', {
+    urls: allUrls
+  })
+}
 async function handleHomePage (req, res) {
-  if(!req.user) return res.redirect("/login");
   const allUrls = await URL.find({createdBy : req.user._id});
   return res.render('home', {
     urls: allUrls
@@ -30,5 +35,6 @@ async function handleHomePage (req, res) {
 }
 module.exports = { 
   handleRedirectToUrl,
-  handleHomePage
+  handleHomePage,
+  handleAdminLogin,
 }
